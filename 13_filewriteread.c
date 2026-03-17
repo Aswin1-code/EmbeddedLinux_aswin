@@ -10,6 +10,7 @@ int main(){
      lseek(fd, 0, SEEK_SET);
      read(fd,buf,36);
      printf("\nFile Contents:%s",buf);
+     chmod("myfile.txt",0644);
      close(fd);
      return 0;
 }
