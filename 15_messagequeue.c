@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<unistd.h>
+#include<sys/ipc.h>
+#include<sys/msg.h>
+#include<sys/wait.h>
+#include<string.h>
+
+struct msgbuf {//Fix size of shared memory
+   long msgtype;
+   char data[100];
+ };
+
+int main(){
+  int mqid; //ID for message queue
+  struct msgbuf message; //struct to store data to write/read from mem
+  key_t key = ftok("/home/iotits/sta.c",65); //Generate key
+
+  mqid = msgget(key, 0666 | IPC_CREAT); //Create msg queue identifer.
+
+  pid_t pid = fork(); // create a child process
+  if (pid == 0){
+    sleep(2); // wait for parent to write to shared mem
+    printf("\nI am child process:");
+    msgrcv(mqid,&message, sizeof(message.data),1,0);
+    printf("\nMessage from parent:%s", message.data);
+    msgctl(mqid, IPC_RMID, NULL);
+  }
+  else{
+     message.msgtype=1;
+          printf("\nI am parent process:\n");
+    strcpy(message.data, "Welcome to Messsage Queue Demo");
+    msgsnd(mqid,&message, sizeof(message.data),0);
+
+    //wait(NULL); //Intimate child that parent completed
+    //msgctl(mqid, IPC_RMID, NULL);
+    printf("\n Message Queue identifer removed from RAM");
+  }
+
+  return 0;
+}
