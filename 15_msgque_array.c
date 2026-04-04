@@ -23,10 +23,17 @@ int main() {
 
     if (pid == 0) {
         // Child process: receive and print all messages
+        sleep(2);
         for (int i = 0; i < NUM_MSGS; i++) {
+            if (i%2!=0){
             msgrcv(mqid, &message, sizeof(message.data), 1, 0);
-            printf("Child received: %s\n", message.data);
+            printf("Child1 received: %s\n", message.data);
         }
+        else{
+            msgrcv(mqid, &message, sizeof(message.data), 2, 0);
+            printf("Child2 received: %s\n", message.data);
+        }
+    }
         // Remove the message queue
         msgctl(mqid, IPC_RMID, NULL);
     } else {
@@ -38,11 +45,18 @@ int main() {
         };
         for (int i = 0; i < NUM_MSGS; i++) {
             message.msgtype = 1;
+            strncpy(message.data, messages[i],MSG_SIZE);
+            msgsnd(mqid, &message, sizeof(message.data), 0);
+            printf("Parent sent: %s\n", message.data);
+        }
+        for (int i = 0; i < NUM_MSGS; i++) {
+            message.msgtype = 2;
             strncpy(message.data, messages[i], MSG_SIZE);
             msgsnd(mqid, &message, sizeof(message.data), 0);
             printf("Parent sent: %s\n", message.data);
         }
-        wait(NULL); // Wait for child to finish
+
+       wait(NULL); // Wait for child to finish
     }
     return 0;
 }
