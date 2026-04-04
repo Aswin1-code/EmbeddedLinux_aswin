@@ -27,7 +27,7 @@ int main(){
     printf("\nI am parent process:\n");
     strcpy(message.data, "Welcome to Messsage Queue Demo");
     msgsnd(mqid,&message, sizeof(message.data),0);
-    printf("\nMessage sent from parent:%s\n", message.data);
+    printf("\nMessage sent from_parent:%s\n", message.data);
   }
   return 0;
 }
