@@ -38,15 +38,15 @@ int main() {
         msgctl(mqid, IPC_RMID, NULL);
     } else {
         // Parent process: send multiple messages
-        char *messages[NUM_MSGS] = {
+        char *messages[NUM_MSGS] = {      
             "Hello from parent - message 1",
             "Hello from parent - message 2",
             "Hello from parent - message 3"
         };
         for (int i = 0; i < NUM_MSGS; i++) {
             message.msgtype = 1;
-            strncpy(message.data, messages[i],MSG_SIZE);
-            msgsnd(mqid, &message, sizeof(message.data), 0);
+            strncpy(message.data, messages[i],MSG_SIZE);   // each data is copied once
+            msgsnd(mqid, &message, sizeof(message.data), 0);//copied data is sent
             printf("Parent sent: %s\n", message.data);
         }
         for (int i = 0; i < NUM_MSGS; i++) {
