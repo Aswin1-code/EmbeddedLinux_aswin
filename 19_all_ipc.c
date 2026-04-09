@@ -5,11 +5,7 @@ The program should include functions
 to create and use shared memory, msg queues 
 and pipes to exchange data between processes.
   */
-
-
-
-
-
+  
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>

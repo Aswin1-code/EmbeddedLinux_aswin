@@ -17,10 +17,12 @@ int main() {
     if (pid == 0) {
         printf("Child (PID %d): Waiting for signal...\n", getpid());
         sa.sa_handler = handler; //Assigning Signal handler function
+        //-----
         if (sigaction(SIGUSR1, &sa, NULL) == -1) { // sigaction -> register handler
             perror("sigaction");
             exit(1);
         }
+        //-----
         while (1) {   // waiting for signal
             sleep(1);
         }
