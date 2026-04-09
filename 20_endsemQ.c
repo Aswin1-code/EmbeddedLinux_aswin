@@ -51,7 +51,7 @@ int main(){
         }
     }
 
-    // Cleanup (never reached in loop, but needed in exam)
+    // Cleanup (never reached in loop, but needed in exam) exam >?🧐
     shmdt(shm_ptr);
     shmctl(shmid, IPC_RMID, NULL);
 
