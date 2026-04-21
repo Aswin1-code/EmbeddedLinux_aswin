@@ -45,13 +45,13 @@ int main(){
 
         while(1){
             printf("Enter keycode: ");
-            scanf("%s", input);
+            scanf("%s\n", input);
 
             strcpy(shm_ptr, input);
         }
     }
 
-    // Cleanup (never reached in loop, but needed in exam) exam >?🧐
+    // Cleanup (never reached in loop, but needed in exam) exam >🧐
     shmdt(shm_ptr);
     shmctl(shmid, IPC_RMID, NULL);
 
