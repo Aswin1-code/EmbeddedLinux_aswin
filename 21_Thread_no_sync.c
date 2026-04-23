@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<pthread.h>
 #include<unistd.h>
-int v = 2; //shared memory
+int v = 2; //global variable - shared between threads
 void* task1(){
    int t;
    printf("T1:intial value of v:%d\n",v);
@@ -22,7 +22,8 @@ void* task2(){
    printf("T2:final value of v:%d\n",v);
 }
 int main(){
-   pthread_t t1,t2;
+   pthread_t t1,t2;         // thread identifiers
+   printf("\nInitial value of v (main):%d\n",v);
    pthread_create(&t1,NULL, task1, NULL);
    pthread_create(&t2,NULL, task2, NULL);
    pthread_join(t1,NULL);
@@ -30,3 +31,8 @@ int main(){
    printf("\nFinal value of v (main):%d\n",v);
    return 0;
 }
+
+
+//gcc 21_Thread_no_sync.c -o threadNoSync -lpthread
+// should compile and link together
+//./threadNoSync  
