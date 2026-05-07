@@ -26,7 +26,8 @@ int main() {
 
         printf("\nExecute Linux Commands from child process\n");
         printf("Child replacing process using execl()\n");
-        execl("/bin/ls", "ls", "-l", NULL);
+        //execl("/bin/ls", "ls", "-l", NULL);
+        printf("printing something");
         printf("Exec failed!\n");         // Runs only if exec fails 
         exit(0);
     }
