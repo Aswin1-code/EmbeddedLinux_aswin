@@ -3,7 +3,7 @@
 #include<pthread.h>
 
 void *Thread1(void*){
-  printf("\nI am in a Thread 1:%lu", pthread_self());
+  printf("\nI am in a Thread 1:%lu", pthread_self()); //lu - long unsigned .....
   pthread_exit(NULL);
 }
 int main(){

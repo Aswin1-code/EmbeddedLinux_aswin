@@ -16,11 +16,10 @@ int main(){
       }
       else{
             close(p[0]); //close write
-            strcpy(wrtmsg, "Welcome to Pipes");
+            strcpy(wrtmsg, "Welcome to Pipes"); //====--------
             write(p[1],wrtmsg,sizeof(wrtmsg)); //parent perform write
             printf("\nParent written to pipe:%s\n", wrtmsg);
             close(p[1]); //close write
           }
     return 0;
  }
-6

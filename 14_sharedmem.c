@@ -12,13 +12,10 @@ int main(){
   char *memdata; //string to store data to write/read from mem
   
   key_t key = ftok("/home/iotits/sta.c",65); //Generate key, use a valid existing file in your sys path
- 
   smid = shmget(key, SIZE, 0666 | IPC_CREAT); //Create Shared mem.
-  
   memdata = (char*)shmat(smid,NULL,0); //Attach mem to process
-  
+
   pid_t pid = fork(); // create a child process
- 
   if (pid == 0){
     sleep(2); // wait for parent to write to shared mem
     printf("\nI am child process:");

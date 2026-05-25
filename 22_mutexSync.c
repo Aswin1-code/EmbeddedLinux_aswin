@@ -12,12 +12,12 @@ void* task1(){
    t = v;  //Reading from shared memory
    t = t+2; //Updating the value
    sleep(1); //Waiting for other process (but not allows)
-   v = t; //Writing back to shaed memory
+   v = t; //Writing back to shared memory ,,,,
    printf("T1:final value of v:%d\n",v);
    //printf("\nExiting critical section of T1\n");
    pthread_mutex_unlock(&lock);//unlocking critical section
 }
-void* task2(){
+void* task2(){ // similar to previous da,, 
    int t;
    printf("\nEntering critical section of T2:\n");
    pthread_mutex_lock(&lock);
